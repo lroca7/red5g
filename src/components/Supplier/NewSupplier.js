@@ -11,6 +11,15 @@ const NewSupplier = () => {
         nameSupplier: "",
         lastNameSupplier: "",
         nitSupplier: "",
+        addressSupplier: "",
+        phoneSupplier: "",
+        emailSupplier: "",
+        descriptionSupplier: "",
+        nameContact: "",
+        lastNameContact: "",
+        positionContact: "",
+        emailContact: "",
+        phoneContact: "",
     };
 
     const [supplierValues, setSupplierValues] = useState(initialValues);
@@ -19,7 +28,17 @@ const NewSupplier = () => {
         nameSupplier: false,
         lastNameSupplier: false,
         nitSupplier: false,
+        addressSupplier: false,
+        phoneSupplier: false,
+        emailSupplier: false,
+        descriptionSupplier: false,
+        nameContact: false,
+        lastNameContact: false,
+        positionContact: false,
+        emailContact: false,
+        phoneContact: false,
     };
+
     const [errorState, setErrorState] = useState(initialErrorState);
 
     const checkValidation = () => {
@@ -32,12 +51,13 @@ const NewSupplier = () => {
             }
         });
         setErrorState(errorValidate);
+        return errorValidate;
     };
     const nextStep = () => {
-        checkValidation();
+        const errorValidate = checkValidation();
 
         let errors = 0;
-        Object.entries(errorState).forEach(([key, value]) => {
+        Object.entries(errorValidate).forEach(([key, value]) => {
             if (value === true) {
                 errors = errors + 1;
             }
@@ -49,10 +69,11 @@ const NewSupplier = () => {
 
     const handleChange = (element) => {
         const value = element.target.value;
+        const key = element.target.id;
 
         setSupplierValues({
             ...supplierValues,
-            nameSupplier: value,
+            [key]: value,
         });
     };
 
@@ -91,6 +112,7 @@ const NewSupplier = () => {
                                 label="Nombres"
                                 error={errorState.nameSupplier}
                                 value={supplierValues.nameSupplier}
+                                id="nameSupplier"
                                 onChange={handleChange}
                             ></TextField>
                             <TextField
@@ -99,6 +121,7 @@ const NewSupplier = () => {
                                 label="Apellidos"
                                 error={errorState.lastNameSupplier}
                                 value={supplierValues.lastNameSupplier}
+                                id="lastNameSupplier"
                                 onChange={handleChange}
                             ></TextField>
                         </Grid>
@@ -110,16 +133,22 @@ const NewSupplier = () => {
                                 error={errorState.nitSupplier}
                                 value={supplierValues.nitSupplier}
                                 onChange={handleChange}
+                                id="nitSupplier"
                             ></TextField>
                             <TextField
                                 className="field"
                                 variant="outlined"
                                 label="Dirección"
+                                error={errorState.addressSupplier}
+                                value={supplierValues.addressSupplier}
+                                onChange={handleChange}
+                                id="addressSupplier"
                             ></TextField>
                             <Select
                                 className="field field-select"
                                 variant="outlined"
                                 label="Ciudad"
+                                id="city"
                             >
                                 <MenuItem>Barranquilla</MenuItem>
                                 <MenuItem>Bogota</MenuItem>
@@ -133,16 +162,28 @@ const NewSupplier = () => {
                                 className="field"
                                 variant="outlined"
                                 label="Teléfono"
+                                error={errorState.phoneSupplier}
+                                value={supplierValues.phoneSupplier}
+                                onChange={handleChange}
+                                id="phoneSupplier"
                             ></TextField>
                             <TextField
                                 className="field"
                                 variant="outlined"
                                 label="Correo electronico"
+                                error={errorState.emailSupplier}
+                                value={supplierValues.emailSupplier}
+                                onChange={handleChange}
+                                id="emailSupplier"
                             ></TextField>
                             <TextField
                                 className="field"
                                 variant="outlined"
                                 label="Describa producto o servicio"
+                                error={errorState.descriptionSupplier}
+                                value={supplierValues.descriptionSupplier}
+                                onChange={handleChange}
+                                id="descriptionSupplier"
                             ></TextField>
                         </Grid>
                     </div>
@@ -158,18 +199,30 @@ const NewSupplier = () => {
                                 variant="outlined"
                                 label="Nombres"
                                 xs={4}
+                                error={errorState.nameContact}
+                                value={supplierValues.nameContact}
+                                onChange={handleChange}
+                                id="nameContact"
                             ></TextField>
                             <TextField
                                 className="field"
                                 variant="outlined"
                                 label="Apellidos"
                                 xs={4}
+                                error={errorState.lastNameContact}
+                                value={supplierValues.lastNameContact}
+                                onChange={handleChange}
+                                id="lastNameContact"
                             ></TextField>
                             <TextField
                                 className="field"
                                 variant="outlined"
                                 label="Cargo"
                                 xs={4}
+                                error={errorState.positionContact}
+                                value={supplierValues.positionContact}
+                                onChange={handleChange}
+                                id="positionContact"
                             ></TextField>
                         </Grid>
                         <Grid className="colm-12 grid-section">
@@ -178,12 +231,20 @@ const NewSupplier = () => {
                                 variant="outlined"
                                 label="Teléfono"
                                 xs={6}
+                                error={errorState.phoneContact}
+                                value={supplierValues.phoneContact}
+                                onChange={handleChange}
+                                id="phoneContact"
                             ></TextField>
                             <TextField
                                 className="field"
                                 variant="outlined"
                                 label="Correo electronico"
                                 xs={6}
+                                error={errorState.emailContact}
+                                value={supplierValues.emailContact}
+                                onChange={handleChange}
+                                id="emailContact"
                             ></TextField>
                         </Grid>
                     </div>
