@@ -1,10 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import Supplier from "./components/Supplier/Supplier";
+import NewSupplier from "./components/Supplier/NewSupplier";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
+    return (
+        <div className="App">
+            <Routes>
+                <Route path="/" element={<Supplier />}></Route>
+                <Route path="/new/supplier" element={<NewSupplier />}></Route>
+            </Routes>
+            {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -17,9 +24,9 @@ function App() {
         >
           Learn React
         </a>
-      </header>
-    </div>
-  );
+      </header> */}
+        </div>
+    );
 }
 
 export default App;
