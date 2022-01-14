@@ -5,8 +5,7 @@ import logoGroup from "../../assets/images/people.png";
 import "./Supplier.scss";
 import Button from "@mui/material/Button";
 import { Modal } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
-import {} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Supplier = () => {
     const history = useNavigate();
@@ -21,10 +20,9 @@ const Supplier = () => {
         }
     };
 
-    const startProcess = () => {
-        setOpen(true);
+    const handleChangeCheck = () => {
+        setCheckAuth(!checkAuth);
     };
-
     const handleClose = () => {
         setOpen(false);
     };
@@ -87,7 +85,7 @@ const Supplier = () => {
                     type="checkbox"
                     value={checkAuth}
                     onChange={() => {
-                        setCheckAuth(!checkAuth);
+                        handleChangeCheck();
                     }}
                 ></input>
                 Autorizo el <a href="#">tratamiento de mis datos personales</a>{" "}
@@ -95,21 +93,20 @@ const Supplier = () => {
                 web.
             </div>
 
-            <Modal open={open} close={handleClose}>
+            <Modal open={open}>
                 <div className="modal-authorization">
                     <p className="text-modal">
                         Para continuar con el proceso de inscripción es
                         necesario autorizar el tratamiento de datos y los
                         términos y condiciones del sitio.
                     </p>
-                    <Link
-                        to="/new/supplier"
+                    <Button
                         className="secondary-button"
                         variant="contained"
-                        onClick={() => startProcess()}
+                        onClick={() => handleClose()}
                     >
                         ACEPTAR
-                    </Link>
+                    </Button>
                 </div>
             </Modal>
         </div>

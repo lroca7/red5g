@@ -1,6 +1,7 @@
 .supplier {
     font-family: "Open Sans", sans-serif;
-    margin: 0 183px 40px;
+    margin: 0 auto;
+    width: 920px;
     .title {
         color: #003662;
         font-size: 28px;
@@ -25,9 +26,18 @@
     .box-option {
         border: 1px solid #ced4da;
         border-radius: 5px;
-        padding: 40px 35px;
         width: 442px;
+        padding: 30px 0;
         height: 320px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+
+        img {
+            width: 118px;
+            height: 120px;
+        }
     }
     .box-description {
         margin: 20px 0px;
@@ -35,6 +45,7 @@
 
     .legal-check {
         margin-bottom: 60px;
+        text-align: left;
     }
 }
 
@@ -71,6 +82,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.new-supplier {
+    margin-bottom: 40px;
 }
 
 .third-button {

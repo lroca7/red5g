@@ -5,6 +5,11 @@ import Button from "@mui/material/Button";
 import { Grid, Input, MenuItem, Modal, Select, TextField } from "@mui/material";
 
 const NewSupplier = () => {
+    const [open, setOpen] = useState(false);
+
+    const nextStep = () => {
+        setOpen(true);
+    };
     return (
         <div className="new-supplier supplier">
             <h1 className="title">Formulario de inscripción de proveedores</h1>
@@ -129,11 +134,35 @@ const NewSupplier = () => {
                     </div>
                 </div>
                 <div className="form-actions">
-                    <Button variant="contained" className="third-button">
+                    <Button
+                        variant="contained"
+                        className="third-button"
+                        onClick={() => {
+                            nextStep();
+                        }}
+                    >
                         SIGUIENTE
                     </Button>
                 </div>
             </div>
+
+            <Modal open={open}>
+                <div className="modal-authorization">
+                    <p className="text-modal">
+                        Su solicitud de registro como proveedor de servicios
+                        para FINSOCIAL se ha generado con éxito, próximamente
+                        enviaremos un correo electrónico con la decisión de esta
+                        solicitud.
+                    </p>
+                    <Button
+                        className="default-button"
+                        variant="outlined"
+                        onClick={() => setOpen(false)}
+                    >
+                        FINALIZAR
+                    </Button>
+                </div>
+            </Modal>
         </div>
     );
 };
