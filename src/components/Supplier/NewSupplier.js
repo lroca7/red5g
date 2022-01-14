@@ -7,9 +7,55 @@ import { Grid, Input, MenuItem, Modal, Select, TextField } from "@mui/material";
 const NewSupplier = () => {
     const [open, setOpen] = useState(false);
 
-    const nextStep = () => {
-        setOpen(true);
+    const initialValues = {
+        nameSupplier: "",
+        lastNameSupplier: "",
+        nitSupplier: "",
     };
+
+    const [supplierValues, setSupplierValues] = useState(initialValues);
+
+    const initialErrorState = {
+        nameSupplier: false,
+        lastNameSupplier: false,
+        nitSupplier: false,
+    };
+    const [errorState, setErrorState] = useState(initialErrorState);
+
+    const checkValidation = () => {
+        const errorValidate = JSON.parse(JSON.stringify(errorState));
+        Object.entries(supplierValues).forEach(([key, value]) => {
+            if (value === "") {
+                errorValidate[key] = true;
+            } else {
+                errorValidate[key] = false;
+            }
+        });
+        setErrorState(errorValidate);
+    };
+    const nextStep = () => {
+        checkValidation();
+
+        let errors = 0;
+        Object.entries(errorState).forEach(([key, value]) => {
+            if (value === true) {
+                errors = errors + 1;
+            }
+        });
+        if (errors === 0) {
+            setOpen(true);
+        }
+    };
+
+    const handleChange = (element) => {
+        const value = element.target.value;
+
+        setSupplierValues({
+            ...supplierValues,
+            nameSupplier: value,
+        });
+    };
+
     return (
         <div className="new-supplier supplier">
             <h1 className="title">Formulario de inscripción de proveedores</h1>
@@ -32,7 +78,7 @@ const NewSupplier = () => {
                 <b>diligenciando todos los datos solicitados a continuación.</b>
             </p>
 
-            <div className="form-supplier">
+            <form className="form-supplier">
                 <div className="form-supplier-section">
                     <h2 className="section-title">
                         1.1. Identificación del proveedor
@@ -43,11 +89,17 @@ const NewSupplier = () => {
                                 className="field"
                                 variant="outlined"
                                 label="Nombres"
+                                error={errorState.nameSupplier}
+                                value={supplierValues.nameSupplier}
+                                onChange={handleChange}
                             ></TextField>
                             <TextField
                                 className="field"
                                 variant="outlined"
                                 label="Apellidos"
+                                error={errorState.lastNameSupplier}
+                                value={supplierValues.lastNameSupplier}
+                                onChange={handleChange}
                             ></TextField>
                         </Grid>
                         <Grid className="colm-9 grid-section">
@@ -55,6 +107,9 @@ const NewSupplier = () => {
                                 className="field"
                                 variant="outlined"
                                 label="NIT/Cédula"
+                                error={errorState.nitSupplier}
+                                value={supplierValues.nitSupplier}
+                                onChange={handleChange}
                             ></TextField>
                             <TextField
                                 className="field"
@@ -144,7 +199,7 @@ const NewSupplier = () => {
                         SIGUIENTE
                     </Button>
                 </div>
-            </div>
+            </form>
 
             <Modal open={open}>
                 <div className="modal-authorization">
